@@ -4,22 +4,22 @@
  * XMPPHP: The PHP XMPP Library
  * Copyright (C) 2008  Nathanael C. Fritz
  * This file is part of SleekXMPP.
- * 
+ *
  * XMPPHP is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * XMPPHP is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with XMPPHP; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * @category   xmpphp 
+ * @category   xmpphp
  * @package	XMPPHP
  * @author	 Nathanael C. Fritz <JID: fritzy@netflint.net>
  * @author	 Stephan Wentz <JID: stephan@jabber.wentz.it>
@@ -37,8 +37,8 @@ require_once dirname(__FILE__) . '/Log.php';
 
 /**
  * XMPPHP XML Stream
- * 
- * @category   xmpphp 
+ *
+ * @category   xmpphp
  * @package	XMPPHP
  * @author	 Nathanael C. Fritz <JID: fritzy@netflint.net>
  * @author	 Stephan Wentz <JID: stephan@jabber.wentz.it>
@@ -264,7 +264,7 @@ class XMPPHP_XMLStream {
       $ns_tags = array($xpath);
     }
     foreach ($ns_tags as $ns_tag) {
-      list($l, $r) = split("}", $ns_tag);
+      list($l, $r) = explode("}", $ns_tag);
       if ($r != null) {
         $xpart = array(substr($l, 1), $r);
       } else {
@@ -375,7 +375,7 @@ class XMPPHP_XMLStream {
    * Core reading tool
    * 0 -> only read if data is immediately ready
    * NULL -> wait forever and ever
-   * integer -> process for this amount of time 
+   * integer -> process for this amount of time
    */
   private function __process($maximum=5) {
 
@@ -493,7 +493,7 @@ class XMPPHP_XMLStream {
 
   /**
    * XML start callback
-   * 
+   *
    * @see xml_set_element_handler
    *
    * @param resource $parser
@@ -534,7 +534,7 @@ class XMPPHP_XMLStream {
 
   /**
    * XML end callback
-   * 
+   *
    * @see xml_set_element_handler
    *
    * @param resource $parser

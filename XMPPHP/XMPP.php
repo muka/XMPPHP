@@ -4,22 +4,22 @@
  * XMPPHP: The PHP XMPP Library
  * Copyright (C) 2008  Nathanael C. Fritz
  * This file is part of SleekXMPP.
- * 
+ *
  * XMPPHP is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * XMPPHP is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with XMPPHP; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  *
- * @category   xmpphp 
+ * @category   xmpphp
  * @package	XMPPHP
  * @author	 Nathanael C. Fritz <JID: fritzy@netflint.net>
  * @author	 Stephan Wentz <JID: stephan@jabber.wentz.it>
@@ -32,8 +32,8 @@ require_once dirname(__FILE__) . "/Roster.php";
 
 /**
  * XMPPHP Main Class
- * 
- * @category   xmpphp 
+ *
+ * @category   xmpphp
  * @package	XMPPHP
  * @author	 Nathanael C. Fritz <JID: fritzy@netflint.net>
  * @author	 Stephan Wentz <JID: stephan@jabber.wentz.it>
@@ -378,7 +378,7 @@ class XMPPHP_XMPP extends XMPPHP_XMLStream {
         $vars['digest-uri'] = 'xmpp/' . $this->server;
 
       // now, the magic...
-      $a1 = sprintf('%s:%s:%s', $this->user, $vars['realm'], $this->password);
+      $a1 = sprintf('%s:%s:%s', $this->user, isset($vars['realm']) ? $vars['realm'] : '', $this->password);
       if ($vars['algorithm'] == 'md5-sess') {
         $a1 = pack('H32', md5($a1)) . ':' . $vars['nonce'] . ':' . $vars['cnonce'];
       }
@@ -386,7 +386,7 @@ class XMPPHP_XMPP extends XMPPHP_XMLStream {
       $password = md5($a1) . ':' . $vars['nonce'] . ':' . $vars['nc'] . ':' . $vars['cnonce'] . ':' . $vars['qop'] . ':' . md5($a2);
       $password = md5($password);
       $response = sprintf('username="%s",realm="%s",nonce="%s",cnonce="%s",nc=%s,qop=%s,digest-uri="%s",response=%s,charset=utf-8',
-              $this->user, $vars['realm'], $vars['nonce'], $vars['cnonce'], $vars['nc'], $vars['qop'], $vars['digest-uri'], $password);
+          $this->user, isset($vars['realm']) ? $vars['realm'] : '', $vars['nonce'], $vars['cnonce'], $vars['nc'], $vars['qop'], $vars['digest-uri'], $password);
 
       // Send the response
       $response = base64_encode($response);
